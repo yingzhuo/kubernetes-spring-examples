@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}]%-5level %logger{72}[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ================================================     dev    ================================================ -->
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <!-- ================================================     k8s    ================================================ -->
+    <springProfile name="k8s">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>false</append>
+            <file>${LOG_PATH}/${LOG_FILE}.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${LOG_FILE}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}]%-5level %logger{72}[%L] - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>false</append>
+            <file>${LOG_PATH}/${LOG_FILE}.json</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${LOG_FILE}.%d{yyyy-MM-dd}.%i.json.gz</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="STASH"/>
+        </root>
+    </springProfile>
+
+</included>

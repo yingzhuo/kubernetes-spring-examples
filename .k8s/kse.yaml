@@ -1,0 +1,183 @@
+# ======================================================================================================================
+# kubernetes-spring-examples
+# ======================================================================================================================
+
+# ---
+# namespace
+# ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kse
+---
+
+# ---
+# secret-for-harbor
+# ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor
+  namespace: kse
+data:
+  .dockerconfigjson: "eyJhdXRocyI6eyIxOTIuMTY4Ljk5LjExNSI6eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJQYXNzd29yZDAxISIsImVtYWlsIjoieWluZ3podW9AdnZoY2MuY29tIiwiYXV0aCI6IllXUnRhVzQ2VUdGemMzZHZjbVF3TVNFPSJ9fX0="
+type: kubernetes.io/dockerconfigjson
+---
+
+# ---
+# backend
+# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: kse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  paused: false
+  minReadySeconds: 20
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      imagePullSecrets:
+        - name: harbor
+      volumes:
+        - name: log
+          emptyDir: {}
+      restartPolicy: Always
+      containers:
+        - name: core
+          image: "192.168.99.115/yingzhuo/kse-backend"
+          imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 8
+            timeoutSeconds: 5
+            httpGet:
+              scheme: HTTP
+              path: "/actuator/health"
+              port: 8080
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: log
+              mountPath: "/home/spring/log/"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: kse
+  annotations:
+    com.github.yingzhuo/created-by: "应卓"
+spec:
+  selector:
+    app: backend
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 8080
+---
+
+# ---
+# frontend
+# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: kse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  paused: false
+  minReadySeconds: 20
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      imagePullSecrets:
+        - name: harbor
+      volumes:
+        - name: log
+          emptyDir: {}
+      restartPolicy: Always
+      containers:
+        - name: core
+          image: "192.168.99.115/yingzhuo/kse-frontend"
+          imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 8
+            timeoutSeconds: 5
+            httpGet:
+              scheme: HTTP
+              path: "/actuator/health"
+              port: 7777
+          ports:
+            - name: http
+              containerPort: 7777
+          volumeMounts:
+            - name: log
+              mountPath: "/home/spring/log/"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: kse
+  annotations:
+    com.github.yingzhuo/created-by: "应卓"
+spec:
+  selector:
+    app: frontend
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 7777
+      port: 7777
+---
+
+# ---
+# ingress (nginx)
+# ---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: kse
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: kse.k8s.io
+      http:
+        paths:
+          - path: /backend/(.+)
+            backend:
+              serviceName: backend
+              servicePort: 8080
+          - path: /frontend/(.+)
+            backend:
+              serviceName: frontend
+              servicePort: 7777
+---
