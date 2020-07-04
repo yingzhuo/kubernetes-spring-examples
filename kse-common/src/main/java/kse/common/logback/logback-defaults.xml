@@ -51,4 +51,7 @@
         </root>
     </springProfile>
 
+    <logger name="org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker" additivity="true" level="WARN" />
+    <logger name="com.github.yingzhuo.carnival.scanning.ClassPathScannerBuilder$ClassPathScanningCandidateComponentProvider" additivity="true" level="WARN" />
+
 </included>

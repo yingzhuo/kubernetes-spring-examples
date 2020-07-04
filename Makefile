@@ -6,8 +6,8 @@ no_default:
 clean:
 	@mvn -f $(CURDIR)/pom.xml clean -q
 	@rm -rf $(CURDIR)/_dist || true
-	@docker image rm 192.168.99.115/yingzhuo/kse-frontend
-	@docker image rm 192.168.99.115/yingzhuo/kse-backend
+	@docker image rm 192.168.99.115/yingzhuo/kse-frontend &> /dev/null || true
+	@docker image rm 192.168.99.115/yingzhuo/kse-backend &> /dev/null || true
 
 package:
 	@mvn -f $(CURDIR)/pom.xml clean package

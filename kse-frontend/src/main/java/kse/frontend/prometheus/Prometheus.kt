@@ -1,4 +1,4 @@
-package kse.backend.prometheus
+package kse.frontend.prometheus
 
 import io.micrometer.core.instrument.MeterRegistry
 import org.springframework.beans.factory.InitializingBean
