@@ -10,8 +10,10 @@ import java.util.*
 open class AppJson {
 
     @Autowired(required = false)
-    open fun resetObjectMapper(om: ObjectMapper): Unit {
-        Optional.ofNullable(om).ifPresent { it.registerModule(KotlinModule()) }
+    open fun resetObjectMapper(om: ObjectMapper) {
+        Optional.ofNullable(om).ifPresent {
+            it.registerModule(KotlinModule())
+        }
     }
 
 }
