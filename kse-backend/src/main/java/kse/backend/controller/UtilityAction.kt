@@ -1,7 +1,7 @@
 package kse.backend.controller
 
 import kse.backend.prometheus.Prometheus
-import kse.common.tool.UUIDs
+import kse.backend.tool.UUIDs
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam

@@ -93,6 +93,24 @@
                 <version>1.8</version>
                 <executions>
                     <execution>
+                        <id>post-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy todir="${project.build.outputDirectory}/config/" force="true">
+                                    <fileset dir="${project.basedir}/../.config/">
+                                        <include name="**/*.conf"/>
+                                        <include name="**/*.xml"/>
+                                        <include name="**/*.properties"/>
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>post-pkg</id>
                         <phase>package</phase>
                         <goals>

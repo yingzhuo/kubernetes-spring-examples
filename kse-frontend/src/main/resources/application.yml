@@ -83,3 +83,6 @@ management:
 # ----------------------------------------------------------------------------------------------------------------------
 carnival:
   troubleshooting: on
+  openfeign:
+    logger-name: "Feign"
+    logger-level: basic
