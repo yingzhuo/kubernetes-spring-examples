@@ -5,8 +5,6 @@ spring:
   profiles:
     active:
       - dev
-    include:
-      - debug
   aop:
     auto: true
   main:

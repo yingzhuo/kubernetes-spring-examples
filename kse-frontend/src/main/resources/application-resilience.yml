@@ -1,0 +1,20 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# resilience4j配置
+#  参考: https://resilience4j.readme.io/docs/getting-started-3
+# ----------------------------------------------------------------------------------------------------------------------
+resilience4j:
+  retry:
+    configs:
+      default:
+        maxRetryAttempts: 3
+        waitDuration: 300ms
+        enableExponentialBackoff: false
+        exponentialBackoffMultiplier: 2
+        retryExceptions:
+          - java.io.UncheckedIOException
+          - java.io.IOException
+        ignoreExceptions:
+          - com.github.yingzhuo.carnival.exception.business.BusinessException
+    instances:
+      backend:
+        baseConfig: default

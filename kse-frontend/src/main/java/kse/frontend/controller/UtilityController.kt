@@ -18,9 +18,13 @@ open class UtilityController(
     }
 
     @GetMapping("uuid")
-    open fun uuid(@RequestParam("n", defaultValue = "1") n: Int): List<String> {
+    open fun uuid(
+            @RequestParam("n", defaultValue = "1") n: Int,
+            @RequestParam("short", defaultValue = "false") short: Boolean
+    ): List<String> {
         log.debug("n = {}", n)
-        return utilityClient.uuid(n)
+        log.debug("short = {}", short)
+        return utilityClient.uuid(n, short)
     }
 
 }

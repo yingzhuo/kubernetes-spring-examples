@@ -6,7 +6,7 @@ spring:
     active:
       - dev
     include:
-      - debug
+      - resilience
   aop:
     auto: true
   main:
@@ -84,5 +84,4 @@ management:
 carnival:
   troubleshooting: on
   openfeign:
-    logger-name: "Feign"
-    logger-level: basic
+    logger-level: full

@@ -1,4 +1,4 @@
-package kse.backend.controller
+package kse.backend.action
 
 import kse.backend.prometheus.Prometheus
 import kse.backend.tool.UUIDs
@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RestController
 open class UtilityAction(private val prometheus: Prometheus) {
 
     @GetMapping("uuid")
-    open fun uuid(@RequestParam("n", defaultValue = "1") n: Int): List<String> {
+    open fun uuid(
+            @RequestParam("n", defaultValue = "1") n: Int,
+            @RequestParam("short", defaultValue = "false") short: Boolean
+    ): List<String> {
         try {
-            return UUIDs.createRandom(n)
+            return UUIDs.createRandom(n, short)
         } finally {
             prometheus.uuidCreated(n)
         }
