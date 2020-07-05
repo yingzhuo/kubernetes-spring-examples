@@ -18,3 +18,18 @@ resilience4j:
     instances:
       backend:
         baseConfig: default
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowType: TIME_BASED
+        minimumNumberOfCalls: 20
+        waitDurationInOpenState: 50s
+        failureRateThreshold: 50
+        ignoreExceptions:
+          - com.github.yingzhuo.carnival.exception.business.BusinessException
+    instances:
+      backend:
+        baseConfig: default

@@ -106,9 +106,7 @@
                             <target>
                                 <copy todir="${project.build.outputDirectory}/config/" force="true">
                                     <fileset dir="${project.basedir}/../.config/">
-                                        <include name="**/*.conf"/>
-                                        <include name="**/*.xml"/>
-                                        <include name="**/*.properties"/>
+                                        <include name="**/*.*"/>
                                     </fileset>
                                 </copy>
                             </target>
