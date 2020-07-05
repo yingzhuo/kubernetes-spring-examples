@@ -35,7 +35,7 @@ spring:
   lifecycle:
     timeout-per-shutdown-phase: "30s"
   jmx:
-    enabled: true
+    enabled: false
 
 server:
   port: 7777

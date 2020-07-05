@@ -45,6 +45,7 @@
         <slf4j.version>1.7.30</slf4j.version>
         <netty.version>4.1.50.Final</netty.version>
         <feign.version>11.0</feign.version>
+        <resilience4j.version>1.5.0</resilience4j.version>
         <carnival.version>1.6.24</carnival.version>
 
         <!-- configuration -->
@@ -110,6 +111,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
             <dependency>
@@ -294,7 +300,7 @@
             <dependency>
                 <groupId>io.github.resilience4j</groupId>
                 <artifactId>resilience4j-spring-boot2</artifactId>
-                <version>1.5.0</version>
+                <version>${resilience4j.version}</version>
             </dependency>
 
             <!-- netty -->
