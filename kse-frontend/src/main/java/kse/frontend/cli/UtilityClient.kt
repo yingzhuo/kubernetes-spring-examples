@@ -12,6 +12,7 @@ interface UtilityClient {
     @RequestLine("GET /utility/uuid?n={n}&short={short}")
     fun uuid(@Param("n") n: Int, @Param("short") short: Boolean = false): List<String>
 
+    @Retry(name = "backend")
     @RequestLine("GET /utility/snowflake?n={n}")
     fun snowflake(@Param("n") n: Int): List<String>
 

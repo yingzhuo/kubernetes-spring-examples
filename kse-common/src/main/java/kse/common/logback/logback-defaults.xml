@@ -55,6 +55,8 @@
             additivity="true" level="warn"/>
     <logger name="com.github.yingzhuo.carnival.scanning.ClassPathScannerBuilder$ClassPathScanningCandidateComponentProvider"
             additivity="true" level="warn"/>
+
+    <logger name="io.github.resilience4j.retry.configure.RetryAspect" additivity="true" level="info"/>
     <logger name="io.github.resilience4j.utils.RxJava2OnClasspathCondition" additivity="true" level="warn"/>
     <logger name="io.github.resilience4j.utils.ReactorOnClasspathCondition" additivity="true" level="warn"/>
 

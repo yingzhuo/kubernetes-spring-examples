@@ -8,7 +8,7 @@ import java.io.Reader
 import java.util.*
 
 @Component
-object ErrDecoder : AbstractErrorDecoder() {
+object ErrorDecoder : AbstractErrorDecoder() {
 
     override fun decode(methodKey: String, status: Int, body: Reader, headers: MutableMap<String, MutableCollection<String>>): Optional<Exception> {
         if (status == 400) {
