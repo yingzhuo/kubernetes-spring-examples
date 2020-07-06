@@ -1,5 +1,6 @@
 package kse.backend.action
 
+import com.github.yingzhuo.carnival.exception.business.BusinessException
 import kse.backend.prometheus.Prometheus
 import kse.backend.tool.UUIDs
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,5 +23,8 @@ open class UtilityAction(private val prometheus: Prometheus) {
             prometheus.uuidCreated(n)
         }
     }
+
+    @GetMapping("snowflake")
+    open fun snowflake(): List<String> = throw BusinessException.of("000")
 
 }

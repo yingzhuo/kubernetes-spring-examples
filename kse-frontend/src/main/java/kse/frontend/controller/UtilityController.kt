@@ -27,4 +27,12 @@ open class UtilityController(
         return utilityClient.uuid(n, short)
     }
 
+    @GetMapping("snowflake")
+    open fun snowflake(
+            @RequestParam("n", defaultValue = "1") n: Int
+    ): List<String> {
+        log.debug("n = {}", n)
+        return utilityClient.snowflake(n)
+    }
+
 }
