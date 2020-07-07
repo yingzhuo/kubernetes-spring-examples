@@ -8,7 +8,7 @@ import java.io.Reader
 import java.util.*
 
 @Component
-object ErrorDecoder : AbstractErrorDecoder() {
+object ErrorDecoder : AbstractErrorDecoder(), feign.codec.ErrorDecoder {
 
     override fun decode(methodKey: String, status: Int, body: Reader, headers: MutableMap<String, MutableCollection<String>>): Optional<Exception> {
         if (status == 400) {

@@ -25,7 +25,7 @@ open class AppFeign {
     @Component
     object FeignGlobalRequestInterceptor : RequestInterceptor {
         override fun apply(template: RequestTemplate) {
-            template.header(HttpHeaders.AUTHORIZATION, "Basic YWRtaW46YWRtaW4=")
+            template.header(HttpHeaders.AUTHORIZATION, "Basic YWRtaW46YWRtaW4=") // admin:admin
             template.header(HttpHeaders.USER_AGENT, "OpenFeign")
         }
     }
