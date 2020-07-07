@@ -38,9 +38,15 @@ spring:
     enabled: false
 
 server:
-  port: 7777
+  port: "${port.https}"
   servlet:
     context-path: "/"
+  ssl:
+    enabled: true
+    key-alias: "tomcat"
+    key-store-password: "tomcat"
+    key-store: "classpath:META-INF/keystore.p12"
+    key-store-type: PKCS12
   error:
     path: "/error"
   compression:
@@ -83,5 +89,3 @@ management:
 # ----------------------------------------------------------------------------------------------------------------------
 carnival:
   troubleshooting: on
-  openfeign:
-    logger-level: full

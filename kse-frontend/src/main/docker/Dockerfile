@@ -4,4 +4,4 @@ LABEL MAINTAINER="应卓 <yingzhor@gmail.com>"
 
 ENV APP_PROFILES=k8s
 
-EXPOSE 7777
+EXPOSE 7777 8443

@@ -145,12 +145,14 @@ spec:
             initialDelaySeconds: 8
             timeoutSeconds: 5
             httpGet:
-              scheme: HTTP
+              scheme: HTTPS
               path: "/actuator/health"
-              port: 7777
+              port: 8443
           ports:
             - name: http
               containerPort: 7777
+            - name: https
+              containerPort: 8443
           volumeMounts:
             - name: log
               mountPath: "/home/spring/log/"
