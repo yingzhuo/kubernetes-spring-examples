@@ -1,5 +1,6 @@
 package kse.frontend.controller
 
+import com.github.yingzhuo.carnival.json.Json
 import kse.frontend.cli.UtilityClient
 import org.slf4j.LoggerFactory
 import org.springframework.validation.annotation.Validated
@@ -25,18 +26,24 @@ open class UtilityController(
     open fun uuid(
             @Min(1) @Max(100) @RequestParam("n", defaultValue = "1") n: Int,
             @RequestParam("short", defaultValue = "false") short: Boolean
-    ): List<String> {
+    ): Json {
         log.debug("n = {}", n)
         log.debug("short = {}", short)
-        return utilityClient.uuid(n, short)
+        val results = utilityClient.uuid(n, short)
+        return Json.newInstance()
+                .payload("results", results)
+                .payload("n", n)
     }
 
     @GetMapping("snowflake")
     open fun snowflake(
             @Min(1) @Max(100) @RequestParam("n", defaultValue = "1") n: Int
-    ): List<String> {
+    ): Json {
         log.debug("n = {}", n)
-        return utilityClient.snowflake(n)
+        val results = utilityClient.snowflake(n)
+        return Json.newInstance()
+                .payload("results", results)
+                .payload("n", n)
     }
 
 }

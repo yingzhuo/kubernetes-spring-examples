@@ -1,31 +1,31 @@
 package kse.frontend
 
+import kse.frontend.config.PortConfig
 import org.apache.catalina.connector.Connector
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-open class AppTomcat(@Value("\${port.http}") private val httpPort: Int,
-                     @Value("\${port.https}") private val httpsPort: Int) {
+open class AppTomcat(private val ports: PortConfig) {
 
     companion object {
         private val log = LoggerFactory.getLogger(AppTomcat::class.java)
+        private const val protocol = "org.apache.coyote.http11.Http11NioProtocol"
     }
 
     @Bean
     open fun tomcatServletWebServerFactory(): TomcatServletWebServerFactory {
 
-        log.debug("http-port: {}", httpPort)
-        log.debug("http-ports: {}", httpsPort)
+        log.debug("http-port: {}", ports.http)
+        log.debug("http-ports: {}", ports.https)
 
         // 嵌套函数
         fun connector(): Connector {
-            val connector = Connector("org.apache.coyote.http11.Http11NioProtocol")
+            val connector = Connector(protocol)
             connector.scheme = "http"
-            connector.port = httpPort
+            connector.port = ports.http
             return connector
         }
 
@@ -33,4 +33,5 @@ open class AppTomcat(@Value("\${port.http}") private val httpPort: Int,
         bean.addAdditionalTomcatConnectors(connector())
         return bean
     }
+
 }

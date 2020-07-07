@@ -1,7 +1,5 @@
 package kse.backend.action
 
-import com.github.yingzhuo.carnival.exception.business.BusinessException
-import kse.backend.prometheus.Prometheus
 import kse.backend.service.UtilityService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -11,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("utility")
 open class UtilityAction(
-        private val utilityService: UtilityService,
-        private val prometheus: Prometheus
+        private val utilityService: UtilityService
 ) {
 
     @GetMapping("uuid")
@@ -20,18 +17,14 @@ open class UtilityAction(
             @RequestParam("n", defaultValue = "1") n: Int,
             @RequestParam("short", defaultValue = "false") short: Boolean
     ): List<String> {
-        try {
-            return utilityService.uuid(n, short)
-        } finally {
-            prometheus.uuidCreated(n)
-        }
+        return utilityService.uuid(n, short)
     }
 
     @GetMapping("snowflake")
     open fun snowflake(
             @RequestParam("n", defaultValue = "1") n: Int
     ): List<String> {
-        throw BusinessException.of("000")
+        return utilityService.snowflake(n)
     }
 
 }

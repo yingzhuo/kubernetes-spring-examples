@@ -1,10 +1,12 @@
 package kse.backend.service
 
+import com.github.yingzhuo.carnival.exception.business.BusinessException
+import kse.backend.prometheus.Prometheus
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-open class UtilityServiceImpl : UtilityService {
+open class UtilityServiceImpl(private val prometheus: Prometheus) : UtilityService {
 
     override fun uuid(n: Int, short: Boolean): List<String> {
         val list = mutableListOf<String>()
@@ -14,9 +16,16 @@ open class UtilityServiceImpl : UtilityService {
             }
         }
 
-        return if (short)
-            list.map { it.replace("-", "") }
-        else
-            list
+        try {
+            return if (short)
+                list.map { it.replace("-", "") }
+            else
+                list
+        } finally {
+            prometheus.uuidCreated(n)
+        }
     }
+
+    override fun snowflake(n: Int): List<String> = throw BusinessException.of("000")
+
 }

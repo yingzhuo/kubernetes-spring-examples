@@ -16,9 +16,7 @@ open class AppPrometheus {
     lateinit var actuatorPrefix: String
 
     @Bean
-    open fun timedAspect(): TimedAspect {
-        return TimedAspect()
-    }
+    open fun timedAspect(): TimedAspect = TimedAspect()
 
     @Bean
     open fun meterRegistryCustomizer(): MeterRegistryCustomizer<MeterRegistry> {
