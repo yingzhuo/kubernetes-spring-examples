@@ -1,0 +1,83 @@
+# ---
+# frontend
+# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: kse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  paused: false
+  minReadySeconds: 20
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      imagePullSecrets:
+        - name: harbor
+      volumes:
+        - name: log
+          emptyDir: {}
+      restartPolicy: Always
+      containers:
+        - name: core
+          image: "192.168.99.115/yingzhuo/kse-frontend"
+          imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 8
+            timeoutSeconds: 5
+            httpGet:
+              scheme: HTTPS
+              path: "/actuator/health"
+              port: 8443
+          ports:
+            - name: http
+              containerPort: 7777
+            - name: https
+              containerPort: 8443
+          volumeMounts:
+            - name: log
+              mountPath: "/home/spring/log/"
+        - name: filebeat
+          image: "registry.cn-shanghai.aliyuncs.com/yingzhuo/filebeat:5.6.16"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "LOG_PATH"
+              value: "/var/log/*.json"
+            - name: "ES_HOSTS"
+              value: "192.168.99.114:9200"
+            - name: "ES_INDEX"
+              value: "kse-frontend-%{+yyyy-MM-dd}"
+          volumeMounts:
+            - name: log
+              mountPath: "/var/log"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: kse
+  annotations:
+    com.github.yingzhuo/created-by: "应卓"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/actuator/prometheus"
+    prometheus.io/port: "7777"
+spec:
+  selector:
+    app: frontend
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 7777
+      port: 7777
+---

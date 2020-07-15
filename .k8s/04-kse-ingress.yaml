@@ -1,0 +1,25 @@
+# ---
+# ingress (nginx)
+# ---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: kse
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: kse.k8s.io
+      http:
+        paths:
+          - path: /backend/(.+)
+            backend:
+              serviceName: backend
+              servicePort: 8080
+          - path: /frontend/(.+)
+            backend:
+              serviceName: frontend
+              servicePort: 7777
+---

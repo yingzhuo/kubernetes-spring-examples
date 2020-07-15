@@ -1,0 +1,21 @@
+# ---
+# namespace
+# ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kse
+---
+
+# ---
+# secret-for-harbor
+# ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor
+  namespace: kse
+data:
+  .dockerconfigjson: "eyJhdXRocyI6eyIxOTIuMTY4Ljk5LjExNSI6eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJQYXNzd29yZDAxISIsImVtYWlsIjoieWluZ3podW9AdnZoY2MuY29tIiwiYXV0aCI6IllXUnRhVzQ2VUdGemMzZHZjbVF3TVNFPSJ9fX0="
+type: kubernetes.io/dockerconfigjson
+---
