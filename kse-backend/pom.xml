@@ -131,6 +131,7 @@
                                         <include name="**/*"/>
                                     </fileset>
                                     <fileset dir="${project.basedir}/../.docker">
+                                        <include name=".dockerignore"/>
                                         <include name="docker-entrypoint.sh"/>
                                     </fileset>
                                     <fileset dir="${project.basedir}/target/">
