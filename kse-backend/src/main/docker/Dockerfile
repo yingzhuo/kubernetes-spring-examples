@@ -1,11 +1,11 @@
-# 阶段(一)
+# 阶段 (一)
 
 FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/java:jre-8 as builder
 WORKDIR /tmp
 COPY ./*.jar layed.jar
 RUN java -Djarmode=layertools -jar /tmp/layed.jar extract
 
-# 阶段(二)
+# 阶段 (二)
 FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/java:jre-8
 
 LABEL MAINTAINER="应卓 <yingzhor@gmail.com>"
