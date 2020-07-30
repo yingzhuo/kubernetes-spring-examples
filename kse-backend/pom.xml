@@ -130,6 +130,9 @@
                                     <fileset dir="${project.basedir}/src/main/docker">
                                         <include name="**/*"/>
                                     </fileset>
+                                    <fileset dir="${project.basedir}/../.docker">
+                                        <include name="docker-entrypoint.sh"/>
+                                    </fileset>
                                     <fileset dir="${project.basedir}/target/">
                                         <include name="${project.build.finalName}.jar"/>
                                     </fileset>
