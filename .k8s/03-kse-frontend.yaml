@@ -47,7 +47,7 @@ spec:
               containerPort: 8443
           volumeMounts:
             - name: log
-              mountPath: "/home/spring/log/"
+              mountPath: "/opt/log/"
         - name: filebeat
           image: "registry.cn-shanghai.aliyuncs.com/yingzhuo/filebeat:5.6.16"
           imagePullPolicy: IfNotPresent
