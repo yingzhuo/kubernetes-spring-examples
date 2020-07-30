@@ -90,6 +90,12 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <layers>
+                        <enabled>true</enabled>
+                        <configuration>${project.basedir}/src/layers.xml</configuration>
+                    </layers>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -133,7 +139,6 @@
                                         <include name="*.jar*"/>
                                     </fileset>
                                 </delete>
-                                <touch file="${project.build.directory}/docker-context/.configkeep"/>
                             </target>
                         </configuration>
                     </execution>

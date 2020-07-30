@@ -13,8 +13,8 @@ package:
 	@mvn -f $(CURDIR)/pom.xml clean package
 
 build: package
-	@docker image build --no-cache -t 192.168.99.115/yingzhuo/kse-frontend $(CURDIR)/kse-frontend/target/docker-context/
-	@docker image build --no-cache -t 192.168.99.115/yingzhuo/kse-backend $(CURDIR)/kse-backend/target/docker-context/
+	@docker image build -t 192.168.99.115/yingzhuo/kse-frontend $(CURDIR)/kse-frontend/target/docker-context/
+	@docker image build -t 192.168.99.115/yingzhuo/kse-backend $(CURDIR)/kse-backend/target/docker-context/
 
 release: build
 	@docker login --username=${HARBOR_USERNAME} --password=${HARBOR_PASSWORD} 192.168.99.115 &> /dev/null
