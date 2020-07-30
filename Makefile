@@ -5,7 +5,6 @@ no_default:
 
 clean:
 	@mvn -f $(CURDIR)/pom.xml clean -q
-	@rm -rf $(CURDIR)/_dist || true
 	@docker image rm 192.168.99.115/yingzhuo/kse-frontend &> /dev/null || true
 	@docker image rm 192.168.99.115/yingzhuo/kse-backend &> /dev/null || true
 
@@ -21,9 +20,6 @@ release: build
 	@docker image push 192.168.99.115/yingzhuo/kse-frontend
 	@docker image push 192.168.99.115/yingzhuo/kse-backend
 	@docker logout 192.168.99.115 &> /dev/null
-	@mkdir -p $(CURDIR)/_dist/
-	@cp $(CURDIR)/kse-frontend/target/docker-context/*.jar $(CURDIR)/_dist/
-	@cp $(CURDIR)/kse-backend/target/docker-context/*.jar $(CURDIR)/_dist/
 
 github:
 	@git add .
