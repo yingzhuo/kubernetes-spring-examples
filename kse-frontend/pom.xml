@@ -47,6 +47,10 @@
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
+            <artifactId>carnival-spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
             <artifactId>carnival-spring-boot-starter-openfeign</artifactId>
         </dependency>
         <dependency>

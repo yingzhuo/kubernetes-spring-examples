@@ -64,6 +64,18 @@ management:
     health:
       enabled: true
       show-details: always
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include:
+            - "ping"
+            - "livenessStateProbeIndicator"
+        readiness:
+          include:
+            - "ping"
+            - "livenessStateProbeIndicator"
+            - "readinessStateProbeIndicator"
   info:
     git:
       enabled: true
