@@ -15,6 +15,9 @@
         <into layer="snapshot-dependencies">
             <include>*:*:*SNAPSHOT</include>
         </into>
+        <into layer="kotlin-dependencies">
+            <include>org.jetbrains.kotlin:kotlin-:*</include>
+        </into>
         <into layer="internal-dependencies">
             <include>com.github.yingzhuo:kse-common:*</include>
         </into>
@@ -24,6 +27,7 @@
     <layerOrder>
         <layer>dependencies</layer>
         <layer>spring-boot-loader</layer>
+        <layer>kotlin-dependencies</layer>
         <layer>internal-dependencies</layer>
         <layer>snapshot-dependencies</layer>
         <layer>application</layer>
