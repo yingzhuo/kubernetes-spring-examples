@@ -2,8 +2,8 @@
 
 FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8 as builder
 WORKDIR /tmp
-COPY ./*.jar layed.jar
-RUN java -Djarmode=layertools -jar /tmp/layed.jar extract && \
+COPY ./*.jar app.jar
+RUN java -Djarmode=layertools -jar /tmp/app.jar extract && \
     rm -rf /tmp/dependencies/BOOT-INF/lib/spring-boot-jarmode-layertools-*.jar
 
 # 阶段 (二)
