@@ -127,7 +127,7 @@
                 <configuration>
                     <layers>
                         <enabled>true</enabled>
-                        <configuration>${project.basedir}/src/layers.xml</configuration>
+                        <configuration>${project.basedir}/../layers.xml</configuration>
                     </layers>
                 </configuration>
             </plugin>

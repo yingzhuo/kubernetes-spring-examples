@@ -45,7 +45,7 @@ spec:
               containerPort: 8080
           volumeMounts:
             - name: log
-              mountPath: "/opt/log/"
+              mountPath: "/var/log/"
         - name: filebeat
           image: "registry.cn-shanghai.aliyuncs.com/yingzhuo/filebeat:5.6.16"
           imagePullPolicy: IfNotPresent

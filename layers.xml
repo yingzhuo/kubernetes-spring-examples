@@ -10,6 +10,7 @@
         </into>
         <into layer="application"/>
     </application>
+
     <dependencies>
         <into layer="snapshot-dependencies">
             <include>*:*:*SNAPSHOT</include>
@@ -19,6 +20,7 @@
         </into>
         <into layer="dependencies"/>
     </dependencies>
+
     <layerOrder>
         <layer>dependencies</layer>
         <layer>spring-boot-loader</layer>

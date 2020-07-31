@@ -4,4 +4,4 @@
 logging:
   file:
     name: "kse-backend"
-    path: "/opt/log"
+    path: "/var/log"
