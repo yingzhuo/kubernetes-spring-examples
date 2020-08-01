@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  backend:
+    image: "192.168.99.115/yingzhuo/kse-backend:latest"
+    container_name: kse-backend
+    restart: always
+    environment:
+      - "APP_PROFILES=dco"
+    command: []
+    ports: []
+    networks:
+      - "kse-network"
+
+  frontend:
+    image: "192.168.99.115/yingzhuo/kse-frontend:latest"
+    container_name: kse-frontend
+    restart: always
+    environment:
+      - "APP_PROFILES=dco"
+    ports:
+      - "7777:7777"
+      - "8443:8443"
+    command: []
+    networks:
+      - "kse-network"
+
+networks:
+  kse-network:
+    driver: bridge

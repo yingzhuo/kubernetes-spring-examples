@@ -14,7 +14,7 @@ object FeignRequestInterceptor : RequestInterceptor {
         template.header(HttpHeaders.ACCEPT, "application/json;charset=UTF-8")
         template.header(HttpHeaders.ACCEPT_ENCODING, "UTF-8")
         template.header(HttpHeaders.ACCEPT_CHARSET, "UTF-8")
-        template.header(HttpHeaders.ACCEPT_LANGUAGE, "en-US,zh-CN")
+        template.header(HttpHeaders.ACCEPT_LANGUAGE, "zh-CN")
     }
 
 }

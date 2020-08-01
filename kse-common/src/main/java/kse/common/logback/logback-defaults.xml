@@ -14,6 +14,13 @@
         </root>
     </springProfile>
 
+    <!-- ================================================     dco    ================================================ -->
+    <springProfile name="dco">
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
     <!-- ================================================     k8s    ================================================ -->
     <springProfile name="k8s">
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">

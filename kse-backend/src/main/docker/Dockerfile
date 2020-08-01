@@ -1,20 +1,23 @@
-# 阶段 (一)
+# ----------------------------------------------------------------------------------------------------------------------
+# 预构建
+# ----------------------------------------------------------------------------------------------------------------------
 FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8 as builder
-WORKDIR /tmp
-COPY ./*.jar app.jar
-RUN java -Djarmode=layertools -jar /tmp/app.jar extract && \
-    rm -rf /tmp/dependencies/BOOT-INF/lib/spring-boot-jarmode-layertools-*.jar && \
-    rm -rf /tmp/application/BOOT-INF/classpath.idx && \
-    rm -rf /tmp/application/BOOT-INF/layers.idx
+COPY *.jar /opt/app.jar
+RUN java -Djarmode=layertools -jar /opt/app.jar extract && \
+    rm -rf /opt/dependencies/BOOT-INF/lib/spring-boot-jarmode-layertools-*.jar && \
+    rm -rf /opt/application/BOOT-INF/classpath.idx && \
+    rm -rf /opt/application/BOOT-INF/layers.idx
 
-# 阶段 (二)
+# ----------------------------------------------------------------------------------------------------------------------
+# 构建
+# ----------------------------------------------------------------------------------------------------------------------
 FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8
 
-COPY --from=builder /tmp/dependencies/ ./
-COPY --from=builder /tmp/spring-boot-loader/ ./
-COPY --from=builder /tmp/snapshot-dependencies/ ./
-COPY --from=builder /tmp/internal-dependencies/ ./
-COPY --from=builder /tmp/application/ ./
+COPY --from=builder /opt/dependencies/ ./
+COPY --from=builder /opt/spring-boot-loader/ ./
+COPY --from=builder /opt/snapshot-dependencies/ ./
+COPY --from=builder /opt/internal-dependencies/ ./
+COPY --from=builder /opt/application/ ./
 
 ENV APP_PROFILES=k8s
 
