@@ -41,6 +41,9 @@ spec:
               scheme: HTTP
               path: "/actuator/health/liveness"
               port: 8080
+              httpHeaders:
+                - name: "Authorization"
+                  value: "Basic YWN0dWF0b3I6YWN0dWF0b3I="
           readinessProbe:
             initialDelaySeconds: 8
             timeoutSeconds: 5
@@ -49,6 +52,9 @@ spec:
               scheme: HTTP
               path: "/actuator/health/readiness"
               port: 8080
+              httpHeaders:
+                - name: "Authorization"
+                  value: "Basic YWN0dWF0b3I6YWN0dWF0b3I="
           ports:
             - name: http
               containerPort: 8080

@@ -1,4 +1,4 @@
-package kse.backend
+package kse.frontend
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -25,9 +25,9 @@ open class AppSecurity : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder) {
         // @formatter:off
         auth.inMemoryAuthentication()
-                    .withUser("actuator").password("{noop}actuator").roles("ACTUATOR")
+                .withUser("actuator").password("{noop}actuator").roles("ACTUATOR")
                 .and()
-                    .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder())
+                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder())
         // @formatter:on
     }
 
