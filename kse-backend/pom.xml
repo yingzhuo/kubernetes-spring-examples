@@ -95,10 +95,22 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <mainClass>kse.backend.AppKt</mainClass>
                     <layers>
                         <enabled>true</enabled>
+                        <includeLayerTools>${jar.include.layer.tools}</includeLayerTools>
                         <configuration>${project.basedir}/../layers.xml</configuration>
                     </layers>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                        <exclude>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

@@ -48,7 +48,7 @@
         <netty.version>4.1.51.Final</netty.version>
         <feign.version>11.0</feign.version>
         <resilience4j.version>1.5.0</resilience4j.version>
-        <carnival.version>[1.6.32,)</carnival.version>
+        <carnival.version>[1.6.33,)</carnival.version>
 
         <!-- configuration -->
         <maven.test.skip>true</maven.test.skip>
@@ -58,6 +58,28 @@
         <kotlin.compiler.languageVersion>1.3</kotlin.compiler.languageVersion>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>LayeredJar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jar.include.layer.tools>true</jar.include.layer.tools>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>NonLayeredJar</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <jar.include.layer.tools>false</jar.include.layer.tools>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencyManagement>
         <dependencies>
