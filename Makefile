@@ -1,7 +1,10 @@
-version := 0.0.1
-
 usage:
-	@echo "TODO"
+	@echo "usage          : 显示用法菜单"
+	@echo "build-jar      : 构建Jar文件"
+	@echo "build-image    : 构建Docker镜像"
+	@echo "push-image     : 推送Docker镜像到Harbor"
+	@echo "clean          : 清理"
+	@echo "github         : 推送源代码到Github"
 
 build-jar:
 	@mvn -f $(CURDIR)/pom.xml clean package -P NonLayeredJar
@@ -25,6 +28,7 @@ clean:
 	@mvn -f $(CURDIR)/pom.xml clean -q
 	@docker image rm 192.168.99.115/yingzhuo/kse-frontend &> /dev/null || true
 	@docker image rm 192.168.99.115/yingzhuo/kse-backend &> /dev/null || true
+	@docker image rm $(docker image ls --all --filter dangling=true -q)  &> /dev/null || true
 
 github:
 	@git add .
