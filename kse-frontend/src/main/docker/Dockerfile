@@ -1,8 +1,10 @@
 # ----------------------------------------------------------------------------------------------------------------------
 # 预构建
 # ----------------------------------------------------------------------------------------------------------------------
-FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8 as builder
+FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8 AS builder
+
 COPY *.jar /opt/app.jar
+
 RUN java -Djarmode=layertools -jar /opt/app.jar extract && \
     rm -rf /opt/dependencies/BOOT-INF/lib/spring-boot-jarmode-layertools-*.jar && \
     rm -rf /opt/application/BOOT-INF/classpath.idx && \

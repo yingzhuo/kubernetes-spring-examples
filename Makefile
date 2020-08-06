@@ -4,6 +4,7 @@ usage:
 	@echo "build-image    : 构建Docker镜像"
 	@echo "push-image     : 推送Docker镜像到Harbor"
 	@echo "clean          : 清理"
+	@echo "version        : 变更版本号"
 	@echo "github         : 推送源代码到Github"
 
 build-jar:
@@ -30,9 +31,14 @@ clean:
 	@docker image rm 192.168.99.115/yingzhuo/kse-backend &> /dev/null || true
 	@docker image rm $(docker image ls --all --filter dangling=true -q)  &> /dev/null || true
 
+version:
+	@mvn -f $(CURDIR)/pom.xml versions:set
+	@mvn -f $(CURDIR)/pom.xml -N versions:update-child-modules
+	@mvn -f $(CURDIR)/pom.xml versions:commit
+
 github:
 	@git add .
 	@git commit -m "$(shell /bin/date "+%F %T")"
 	@git push
 
-.PHONY: usage build-jar build-image push-image clean github
+.PHONY: usage build-jar build-image push-image clean github version
