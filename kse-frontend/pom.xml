@@ -135,8 +135,8 @@
                 <configuration>
                     <mainClass>kse.frontend.AppKt</mainClass>
                     <layers>
-                        <enabled>true</enabled>
-                        <includeLayerTools>${jar.include.layer.tools}</includeLayerTools>
+                        <enabled>${jar.springboot.layered.jar}</enabled>
+                        <includeLayerTools>true</includeLayerTools>
                         <configuration>${project.basedir}/../layers.xml</configuration>
                     </layers>
                     <excludes>

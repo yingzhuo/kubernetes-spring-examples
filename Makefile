@@ -1,30 +1,34 @@
-timestamp := $(shell /bin/date "+%F %T")
 version := 0.0.1
 
-no_default:
-	@echo "no default target"
+usage:
+	@echo "TODO"
 
-clean:
-	@mvn -f $(CURDIR)/pom.xml clean -q
-	@docker image rm 192.168.99.115/yingzhuo/kse-frontend &> /dev/null || true
-	@docker image rm 192.168.99.115/yingzhuo/kse-backend &> /dev/null || true
+build-jar:
+	@mvn -f $(CURDIR)/pom.xml clean package -P NonLayeredJar
+	@mkdir -p $(CURDIR)/_dist
+	@cp $(CURDIR)/kse-backend/target/docker-context/*.jar  $(CURDIR)/_dist
+	@cp $(CURDIR)/kse-frontend/target/docker-context/*.jar $(CURDIR)/_dist
 
-package:
-	@mvn -f $(CURDIR)/pom.xml clean package
+build-image:
+	@mvn -f $(CURDIR)/pom.xml clean package -P LayeredJar
+	@docker image build -t 192.168.99.115/yingzhuo/kse-frontend $(CURDIR)/kse-frontend/target/docker-context/
+	@docker image build -t 192.168.99.115/yingzhuo/kse-backend  $(CURDIR)/kse-backend/target/docker-context/
 
-build: package
-	@docker image build -t 192.168.99.115/yingzhuo/kse-frontend --build-arg VERSION=$(version)  $(CURDIR)/kse-frontend/target/docker-context/
-	@docker image build -t 192.168.99.115/yingzhuo/kse-backend  --build-arg VERSION=$(version) $(CURDIR)/kse-backend/target/docker-context/
-
-release: build
+push-image: build-image
 	@docker login --username=${HARBOR_USERNAME} --password=${HARBOR_PASSWORD} 192.168.99.115 &> /dev/null
 	@docker image push 192.168.99.115/yingzhuo/kse-frontend
 	@docker image push 192.168.99.115/yingzhuo/kse-backend
 	@docker logout 192.168.99.115 &> /dev/null
 
+clean:
+	@rm -rf $(CURDIR)/_dist/
+	@mvn -f $(CURDIR)/pom.xml clean -q
+	@docker image rm 192.168.99.115/yingzhuo/kse-frontend &> /dev/null || true
+	@docker image rm 192.168.99.115/yingzhuo/kse-backend &> /dev/null || true
+
 github:
 	@git add .
-	@git commit -m "$(timestamp)"
+	@git commit -m "$(shell /bin/date "+%F %T")"
 	@git push
 
-.PHONY: no_default clean package build release github
+.PHONY: usage build-jar build-image push-image clean github
