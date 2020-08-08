@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 
 @Configuration
@@ -13,10 +14,18 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories
 open class AppSecurity : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
+
+        http.rememberMe()
+                .disable()
+
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
         http.httpBasic().init(http)
 
         // @formatter:off
         http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/actuator", "/actuator/prometheus").permitAll()
                 .antMatchers(HttpMethod.GET,"/actuator/**").hasAnyRole("ACTUATOR")
                 .anyRequest().permitAll()
         // @formatter:on

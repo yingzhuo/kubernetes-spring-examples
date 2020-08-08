@@ -92,4 +92,4 @@ management:
 # Actuator
 # ----------------------------------------------------------------------------------------------------------------------
 carnival:
-  troubleshooting: on
+  troubleshooting: true
