@@ -94,7 +94,6 @@
                     <mainClass>kse.backend.AppKt</mainClass>
                     <layers>
                         <enabled>${jar.springboot.layered.jar}</enabled>
-                        <includeLayerTools>true</includeLayerTools>
                         <configuration>${project.basedir}/../layers.xml</configuration>
                     </layers>
                     <excludes>
