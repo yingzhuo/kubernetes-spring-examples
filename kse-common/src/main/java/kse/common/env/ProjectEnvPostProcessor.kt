@@ -4,7 +4,7 @@ import com.github.yingzhuo.springboot.env.postprocessor.AbstractConventionEnviro
 import org.springframework.boot.SpringApplication
 import org.springframework.core.env.ConfigurableEnvironment
 
-class KubernetesEnvPostProcessor : AbstractConventionEnvironmentPostProcessor() {
+class ProjectEnvPostProcessor : AbstractConventionEnvironmentPostProcessor() {
 
     override fun getName(environment: ConfigurableEnvironment, application: SpringApplication): String = "kse"
 

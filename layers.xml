@@ -15,7 +15,7 @@
             <include>*:*:*SNAPSHOT</include>
         </into>
         <into layer="internal-dependencies">
-            <include>com.github.yingzhuo:kse-common:*</include>
+            <include>com.github.yingzhuo:kse-*:*</include>
         </into>
         <into layer="dependencies"/>
     </dependencies>

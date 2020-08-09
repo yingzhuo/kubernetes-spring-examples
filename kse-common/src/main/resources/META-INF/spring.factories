@@ -1,1 +1,2 @@
-org.springframework.boot.env.EnvironmentPostProcessor=kse.common.env.KubernetesEnvPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=\
+    kse.common.env.ProjectEnvPostProcessor
