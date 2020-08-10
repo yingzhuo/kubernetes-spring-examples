@@ -1,0 +1,21 @@
+# ---
+# backend - svc
+# ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: kse
+  annotations:
+    com.github.yingzhuo/created-by: "应卓"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/actuator/prometheus"
+    prometheus.io/port: "8080"
+spec:
+  selector:
+    app: backend
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 8080

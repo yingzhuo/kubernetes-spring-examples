@@ -22,4 +22,3 @@ spec:
             backend:
               serviceName: frontend
               servicePort: 7777
----

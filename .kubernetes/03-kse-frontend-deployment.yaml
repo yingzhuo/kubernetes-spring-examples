@@ -1,16 +1,16 @@
 # ---
-# backend
+# frontend - deploy
 # ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: frontend
   namespace: kse
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: frontend
   paused: false
   minReadySeconds: 20
   strategy:
@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       labels:
-        app: backend
+        app: frontend
     spec:
       imagePullSecrets:
         - name: harbor
@@ -31,16 +31,16 @@ spec:
       restartPolicy: Always
       containers:
         - name: core
-          image: "192.168.99.115/yingzhuo/kse-backend"
+          image: "192.168.99.115/yingzhuo/kse-frontend"
           imagePullPolicy: Always
           livenessProbe:
             initialDelaySeconds: 8
             timeoutSeconds: 5
             periodSeconds: 12
             httpGet:
-              scheme: HTTP
+              scheme: HTTPS
               path: "/actuator/health/liveness"
-              port: 8080
+              port: 8443
               httpHeaders:
                 - name: "Authorization"
                   value: "Basic YWN0dWF0b3I6YWN0dWF0b3I="
@@ -49,15 +49,17 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 12
             httpGet:
-              scheme: HTTP
+              scheme: HTTPS
               path: "/actuator/health/readiness"
-              port: 8080
+              port: 8443
               httpHeaders:
                 - name: "Authorization"
                   value: "Basic YWN0dWF0b3I6YWN0dWF0b3I="
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: 7777
+            - name: https
+              containerPort: 8443
           volumeMounts:
             - name: log
               mountPath: "/var/log/"
@@ -70,27 +72,7 @@ spec:
             - name: "ES_HOSTS"
               value: "192.168.99.114:9200"
             - name: "ES_INDEX"
-              value: "kse-backend-%{+yyyy-MM-dd}"
+              value: "kse-frontend-%{+yyyy-MM-dd}"
           volumeMounts:
             - name: log
               mountPath: "/var/log"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend
-  namespace: kse
-  annotations:
-    com.github.yingzhuo/created-by: "应卓"
-    prometheus.io/scrape: "true"
-    prometheus.io/path: "/actuator/prometheus"
-    prometheus.io/port: "8080"
-spec:
-  selector:
-    app: backend
-  type: ClusterIP
-  ports:
-    - name: http
-      targetPort: 8080
-      port: 8080
----

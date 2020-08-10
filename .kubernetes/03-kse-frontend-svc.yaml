@@ -1,0 +1,21 @@
+# ---
+# frontend - svc
+# ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: kse
+  annotations:
+    com.github.yingzhuo/created-by: "应卓"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/actuator/prometheus"
+    prometheus.io/port: "7777"
+spec:
+  selector:
+    app: frontend
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 7777
+      port: 7777
