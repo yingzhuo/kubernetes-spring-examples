@@ -24,6 +24,7 @@ COPY --from=builder /opt/dependencies/ ./
 COPY --from=builder /opt/spring-boot-loader/ ./
 COPY --from=builder /opt/snapshot-dependencies/ ./
 COPY --from=builder /opt/internal-dependencies/ ./
+COPY --from=builder /opt/kotlin-libs/ ./
 COPY --from=builder /opt/application/ ./
 
 ENV APP_PROFILES=k8s
