@@ -14,16 +14,27 @@ usage:
 	@echo "github         : 推送源代码到Github"
 
 build-jar:
-	@mvn -f $(CURDIR)/pom.xml clean package -P NonLayeredJar
+	@mvn -f $(CURDIR)/pom.xml clean package -P NonLayeredJar -Dversion=${version}
 	@mkdir -p $(CURDIR)/_dist
 	@cp $(CURDIR)/kse-backend/target/docker-context/*.jar  $(CURDIR)/_dist
 	@cp $(CURDIR)/kse-frontend/target/docker-context/*.jar $(CURDIR)/_dist
 
 build-image:
-	@mvn -f $(CURDIR)/pom.xml clean package -P LayeredJar
-	@docker image build -t $(frontend-image) $(CURDIR)/kse-frontend/target/docker-context/
+	# 打包
+	@mvn -f $(CURDIR)/pom.xml clean package -P LayeredJar -Dversion=${version}
+
+	# 构建镜像 (frontend)
+	@docker image build \
+		-t $(frontend-image) \
+		--build-arg VERSION=$(version) \
+		$(CURDIR)/kse-frontend/target/docker-context/
 	@docker image tag $(frontend-image) $(frontend-image-latest)
-	@docker image build -t $(backend-image)  $(CURDIR)/kse-backend/target/docker-context/
+
+	# 构建镜像 (backend)
+	@docker image build \
+		-t $(backend-image) \
+		--build-arg VERSION=$(version) \
+		$(CURDIR)/kse-backend/target/docker-context/
 	@docker image tag $(backend-image) $(backend-image-latest)
 
 push-image: build-image
@@ -38,7 +49,6 @@ clean:
 	@rm -rf $(CURDIR)/_dist/
 	@mvn -f $(CURDIR)/pom.xml clean -q
 	@docker image ls "192.168.99.115/yingzhuo/kse-*" | xargs docker rmi -f &> /dev/null || true
-	@sleep 1
 	@docker image rm $(docker image ls --all --filter dangling=true -aq)  &> /dev/null || true
 
 version:

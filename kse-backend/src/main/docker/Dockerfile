@@ -15,10 +15,10 @@ RUN java -Djarmode=layertools -jar /opt/app.jar extract && \
 # ----------------------------------------------------------------------------------------------------------------------
 FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8
 
-ARG VERSION=unknown
+ARG VERSION=x.x.x
 
-LABEL maintainer="应卓 <yingzhor@gmail.com>" \
-      com.github.yingzhuo.kse.version=${VERSION}
+LABEL maintainer="应卓 <yingzhor@gmail.com>"
+LABEL version=${VERSION}
 
 COPY --from=builder /opt/dependencies/ ./
 COPY --from=builder /opt/spring-boot-loader/ ./

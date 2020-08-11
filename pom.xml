@@ -36,6 +36,11 @@
     </licenses>
 
     <properties>
+        <!-- version -->
+        <!-- 本参数由脚本传入 -->
+        <version>x.x.x</version>
+
+        <!-- common -->
         <encoding>UTF-8</encoding>
         <java.version>1.8</java.version>
         <kotlin.version>1.3.72</kotlin.version>
@@ -54,9 +59,11 @@
         <maven.test.skip>true</maven.test.skip>
         <maven.install.skip>true</maven.install.skip>
         <maven.deploy.skip>true</maven.deploy.skip>
-        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <kotlin.compiler.languageVersion>1.3</kotlin.compiler.languageVersion>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
+        <!--
+        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+        -->
     </properties>
 
     <profiles>
@@ -610,7 +617,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
+        <finalName>${project.artifactId}-${version}</finalName>
 
         <resources>
             <resource>
@@ -764,7 +771,7 @@
                     <archive>
                         <manifestEntries>
                             <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                            <Implementation-Version>${project.version}-${maven.build.timestamp}</Implementation-Version>
+                            <Implementation-Version>${version}</Implementation-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
