@@ -16,7 +16,7 @@
 
     <name>kubernetes-spring-examples</name>
     <url>https://github.com/yingzhuo/kubernetes-spring-examples</url>
-    <description>spring-boot demo for k8s</description>
+    <description>spring-boot demo for kubernetes</description>
 
     <developers>
         <developer>
