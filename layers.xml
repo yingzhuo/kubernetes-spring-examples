@@ -17,9 +17,6 @@
         <into layer="internal-dependencies">
             <include>com.github.yingzhuo:kse-*:*</include>
         </into>
-        <into layer="kotlin-libs">
-            <include>org.jetbrains.kotlin:kotlin-*:*</include>
-        </into>
         <into layer="dependencies"/>
     </dependencies>
 
@@ -28,7 +25,6 @@
         <layer>spring-boot-loader</layer>
         <layer>internal-dependencies</layer>
         <layer>snapshot-dependencies</layer>
-        <layer>kotlin-libs</layer>
         <layer>application</layer>
     </layerOrder>
 

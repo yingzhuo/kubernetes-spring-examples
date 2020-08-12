@@ -1,8 +1,13 @@
+# 版本
 version := 0.0.1-$(shell /bin/date '+%Y%m%d%H%M%S')
+
+# 镜像版本
 backend-image  := 192.168.99.115/yingzhuo/kse-backend:$(version)
 backend-image-latest  := 192.168.99.115/yingzhuo/kse-backend:latest
 frontend-image := 192.168.99.115/yingzhuo/kse-frontend:$(version)
 frontend-image-latest := 192.168.99.115/yingzhuo/kse-frontend:latest
+
+# ======================================================================================================================
 
 usage:
 	@echo "usage          : 显示用法菜单"
@@ -14,14 +19,15 @@ usage:
 	@echo "github         : 推送源代码到Github"
 
 build-jar:
-	@mvn -f $(CURDIR)/pom.xml clean package -P NonLayeredJar -Dversion=${version}
+	# 打包 (非分层方式)
+	@mvn -f $(CURDIR)/pom.xml clean package -P NonLayeredJar -D version=${version}
 	@mkdir -p $(CURDIR)/_dist
 	@cp $(CURDIR)/kse-backend/target/docker-context/*.jar  $(CURDIR)/_dist
 	@cp $(CURDIR)/kse-frontend/target/docker-context/*.jar $(CURDIR)/_dist
 
 build-image:
-	# 打包
-	@mvn -f $(CURDIR)/pom.xml clean package -P LayeredJar -Dversion=${version}
+	# 打包 (分层方式)
+	@mvn -f $(CURDIR)/pom.xml clean package -P LayeredJar -D version=${version}
 
 	# 构建镜像 (frontend)
 	@docker image build \
@@ -38,6 +44,7 @@ build-image:
 	@docker image tag $(backend-image) $(backend-image-latest)
 
 push-image: build-image
+	# 推送镜像
 	@docker login --username=${HARBOR_USERNAME} --password=${HARBOR_PASSWORD} 192.168.99.115 &> /dev/null
 	@docker image push $(frontend-image)
 	@docker image push $(frontend-image-latest)

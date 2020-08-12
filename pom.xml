@@ -38,7 +38,7 @@
     <properties>
         <!-- version -->
         <!-- 本参数由脚本传入 -->
-        <version>x.x.x</version>
+        <version>unknown</version>
 
         <!-- common -->
         <encoding>UTF-8</encoding>
