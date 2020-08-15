@@ -30,17 +30,11 @@ build-image:
 	@mvn -f $(CURDIR)/pom.xml clean package -P LayeredJar -D version=${version}
 
 	# 构建镜像 (frontend)
-	@docker image build \
-		-t $(frontend-image) \
-		--build-arg VERSION=$(version) \
-		$(CURDIR)/kse-frontend/target/docker-context/
+	@docker image build --tag $(frontend-image) $(CURDIR)/kse-frontend/target/docker-context/
 	@docker image tag $(frontend-image) $(frontend-image-latest)
 
 	# 构建镜像 (backend)
-	@docker image build \
-		-t $(backend-image) \
-		--build-arg VERSION=$(version) \
-		$(CURDIR)/kse-backend/target/docker-context/
+	@docker image build --tag $(backend-image) $(CURDIR)/kse-backend/target/docker-context/
 	@docker image tag $(backend-image) $(backend-image-latest)
 
 push-image: build-image

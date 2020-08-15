@@ -15,10 +15,7 @@ RUN java -Djarmode=layertools -jar app.jar extract && \
 # ----------------------------------------------------------------------------------------------------------------------
 FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8
 
-ARG VERSION=unknown
-
 LABEL maintainer="应卓 <yingzhor@gmail.com>" \
-      version=${VERSION} \
       description="本项目用来各种实验" \
       github-url="https://github.com/yingzhuo/kubernetes-spring-examples"
 
@@ -28,7 +25,6 @@ COPY --from=builder /opt/snapshot-dependencies/ ./
 COPY --from=builder /opt/internal-dependencies/ ./
 COPY --from=builder /opt/application/ ./
 
-ENV APP_PROFILES=k8s \
-    APP_VERSION=${VERSION}
+ENV APP_PROFILES=k8s
 
 EXPOSE 8080
