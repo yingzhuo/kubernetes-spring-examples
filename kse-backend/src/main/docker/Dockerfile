@@ -1,7 +1,9 @@
 # ----------------------------------------------------------------------------------------------------------------------
 # 预构建
 # ----------------------------------------------------------------------------------------------------------------------
-FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8 AS builder
+ARG BASE_IMG=registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8
+
+FROM $BASE_IMG AS builder
 
 COPY *.jar app.jar
 
@@ -13,7 +15,7 @@ RUN java -Djarmode=layertools -jar app.jar extract && \
 # ----------------------------------------------------------------------------------------------------------------------
 # 构建
 # ----------------------------------------------------------------------------------------------------------------------
-FROM registry.cn-shanghai.aliyuncs.com/yingzhuo/springboot:8
+FROM $BASE_IMG
 
 LABEL maintainer="应卓 <yingzhor@gmail.com>" \
       description="本项目用来各种实验" \
