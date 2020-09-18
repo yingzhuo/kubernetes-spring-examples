@@ -43,17 +43,17 @@
         <!-- common -->
         <encoding>UTF-8</encoding>
         <java.version>1.8</java.version>
-        <kotlin.version>1.4.0</kotlin.version>
+        <kotlin.version>1.4.10</kotlin.version>
 
         <!-- framework -->
         <springboot.version>2.3.3.RELEASE</springboot.version>
-        <spring.version>5.2.8.RELEASE</spring.version>
+        <spring.version>5.2.9.RELEASE</spring.version>
         <jackson.version>2.11.2</jackson.version>
         <slf4j.version>1.7.30</slf4j.version>
         <netty.version>4.1.51.Final</netty.version>
         <feign.version>11.0</feign.version>
         <resilience4j.version>1.5.0</resilience4j.version>
-        <carnival.version>1.7.6</carnival.version>
+        <carnival.version>1.7.10</carnival.version>
 
         <!-- configuration -->
         <maven.test.skip>true</maven.test.skip>
