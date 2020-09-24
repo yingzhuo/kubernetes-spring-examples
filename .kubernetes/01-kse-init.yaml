@@ -16,5 +16,5 @@ metadata:
   name: harbor
   namespace: kse
 data:
-  .dockerconfigjson: "eyJhdXRocyI6eyIxMC4yMTEuNTUuMTE1Ijp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IlBhc3N3b3JkMDEhIiwiYXV0aCI6IllXUnRhVzQ2VUdGemMzZHZjbVF3TVNFPSJ9fX0="
+  .dockerconfigjson: "eyJhdXRocyI6eyIxOTIuMTY4Ljk5LjExNSI6eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJQYXNzd29yZDAxISIsImVtYWlsIjoieWluZ3podW9AdnZoY2MuY29tIiwiYXV0aCI6IllXUnRhVzQ2VUdGemMzZHZjbVF3TVNFPSJ9fX0="
 type: kubernetes.io/dockerconfigjson
