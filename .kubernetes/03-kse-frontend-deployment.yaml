@@ -23,8 +23,7 @@ spec:
       labels:
         app: frontend
     spec:
-      imagePullSecrets:
-        - name: harbor
+      serviceAccountName: default
       volumes:
         - name: log
           emptyDir: {}
