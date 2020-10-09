@@ -61,6 +61,10 @@
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>carnival-spring-boot-starter-json</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>carnival-spring-boot-starter-kubernetes</artifactId>
+        </dependency>
 
         <!-- jackson -->
         <dependency>

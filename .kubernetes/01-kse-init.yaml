@@ -20,6 +20,10 @@ data:
   .dockerconfigjson: "eyJhdXRocyI6eyIxOTIuMTY4Ljk5LjExNSI6eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJQYXNzd29yZDAxISIsImVtYWlsIjoieWluZ3podW9AdnZoY2MuY29tIiwiYXV0aCI6IllXUnRhVzQ2VUdGemMzZHZjbVF3TVNFPSJ9fX0="
 ---
 
+# ---
+# service-account
+#  for all pod
+# ---
 apiVersion: v1
 kind: ServiceAccount
 imagePullSecrets:
