@@ -8,9 +8,9 @@ FROM $BASE_IMG AS builder
 COPY *.jar app.jar
 
 RUN java -Djarmode=layertools -jar app.jar extract && \
-    rm -rf /opt/dependencies/BOOT-INF/lib/spring-boot-jarmode-layertools-*.jar && \
-    rm -rf /opt/application/BOOT-INF/classpath.idx && \
-    rm -rf /opt/application/BOOT-INF/layers.idx
+    rm -rf /home/spring/dependencies/BOOT-INF/lib/spring-boot-jarmode-layertools-*.jar && \
+    rm -rf /home/spring/application/BOOT-INF/classpath.idx && \
+    rm -rf /home/spring/application/BOOT-INF/layers.idx
 
 # ----------------------------------------------------------------------------------------------------------------------
 # 构建
@@ -21,11 +21,11 @@ LABEL maintainer="应卓 <yingzhor@gmail.com>" \
       description="本项目用来各种实验" \
       github-url="https://github.com/yingzhuo/kubernetes-spring-examples"
 
-COPY --from=builder /opt/dependencies/ ./
-COPY --from=builder /opt/spring-boot-loader/ ./
-COPY --from=builder /opt/snapshot-dependencies/ ./
-COPY --from=builder /opt/internal-dependencies/ ./
-COPY --from=builder /opt/application/ ./
+COPY --from=builder /home/spring/dependencies/ ./
+COPY --from=builder /home/spring/spring-boot-loader/ ./
+COPY --from=builder /home/spring/snapshot-dependencies/ ./
+COPY --from=builder /home/spring/internal-dependencies/ ./
+COPY --from=builder /home/spring/application/ ./
 
 ENV SPRING_PROFILES_ACTIVE=k8s
 
