@@ -52,7 +52,7 @@
         <slf4j.version>1.7.30</slf4j.version>
         <netty.version>4.1.53.Final</netty.version>
         <feign.version>11.0</feign.version>
-        <resilience4j.version>1.5.0</resilience4j.version>
+        <resilience4j.version>1.6.1</resilience4j.version>
         <carnival.version>1.7.13</carnival.version>
 
         <!-- configuration -->
@@ -283,7 +283,7 @@
             <dependency>
                 <groupId>com.github.yingzhuo</groupId>
                 <artifactId>spring-boot-stater-env</artifactId>
-                <version>1.3.0</version>
+                <version>1.3.1-1</version>
                 <exclusions>
                     <exclusion>
                         <groupId>com.moandjiezana.toml</groupId>
