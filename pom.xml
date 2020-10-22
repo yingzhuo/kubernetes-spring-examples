@@ -560,6 +560,13 @@
                 <version>2.6.2</version>
             </dependency>
 
+            <!-- snakeyaml -->
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>1.27</version>
+            </dependency>
+
             <!-- kotlin -->
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
