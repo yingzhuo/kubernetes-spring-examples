@@ -32,24 +32,13 @@ spec:
         - name: core
           image: "192.168.99.115/yingzhuo/kse-frontend"
           imagePullPolicy: Always
-          livenessProbe:
-            initialDelaySeconds: 8
-            timeoutSeconds: 5
-            periodSeconds: 12
-            httpGet:
-              scheme: HTTPS
-              path: "/actuator/health/liveness"
-              port: 8443
-              httpHeaders:
-                - name: "Authorization"
-                  value: "Basic YWN0dWF0b3I6YWN0dWF0b3I="
           readinessProbe:
             initialDelaySeconds: 8
             timeoutSeconds: 5
             periodSeconds: 12
             httpGet:
               scheme: HTTPS
-              path: "/actuator/health/readiness"
+              path: "/actuator/health"
               port: 8443
               httpHeaders:
                 - name: "Authorization"
