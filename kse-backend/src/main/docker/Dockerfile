@@ -9,6 +9,7 @@ COPY *.jar app.jar
 
 RUN java -Djarmode=layertools -jar app.jar extract && \
     rm -rf /home/java/dependencies/BOOT-INF/lib/java-boot-jarmode-layertools-*.jar && \
+    rm -rf /home/java/application/META-INF/maven && \
     rm -rf /home/java/application/BOOT-INF/classpath.idx && \
     rm -rf /home/java/application/BOOT-INF/layers.idx
 
