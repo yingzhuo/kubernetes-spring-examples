@@ -46,14 +46,14 @@
         <kotlin.version>1.4.10</kotlin.version>
 
         <!-- framework -->
-        <springboot.version>2.3.4.RELEASE</springboot.version>
-        <spring.version>5.2.9.RELEASE</spring.version>
+        <springboot.version>2.3.5.RELEASE</springboot.version>
+        <spring.version>5.2.10.RELEASE</spring.version>
         <jackson.version>2.11.3</jackson.version>
         <slf4j.version>1.7.30</slf4j.version>
         <netty.version>4.1.53.Final</netty.version>
         <feign.version>11.0</feign.version>
         <resilience4j.version>1.6.1</resilience4j.version>
-        <carnival.version>1.7.15</carnival.version>
+        <carnival.version>1.7.16</carnival.version>
 
         <!-- configuration -->
         <maven.test.skip>true</maven.test.skip>
