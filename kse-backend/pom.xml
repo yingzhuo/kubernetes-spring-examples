@@ -91,7 +91,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>kse.backend.AppKt</mainClass>
                     <layers>
                         <enabled>${jar.springboot.layered.jar}</enabled>
                         <configuration>${project.basedir}/../layers.xml</configuration>
