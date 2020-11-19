@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
-
     <include resource="kse/common/logback/logback-defaults.xml"/>
-
-    <logger name="kse" additivity="true" level="DEBUG"/>
-    <logger name="org.hibernate.validator" additivity="true" level="info"/>
-    <logger name="org.springframework" additivity="true" level="info"/>
-    <logger name="io.micrometer" additivity="true" level="info"/>
-    <logger name="org.apache.catalina" additivity="true" level="warn"/>
-    <logger name="org.apache.coyote" additivity="true" level="warn"/>
-
 </configuration>

@@ -5,31 +5,33 @@ ARG BASE_IMG=registry.cn-shanghai.aliyuncs.com/yingzhuo/java:jre-8
 
 FROM $BASE_IMG AS builder
 
-COPY *.jar app.jar
+WORKDIR /opt
 
-RUN java -Djarmode=layertools -jar app.jar extract && \
-    rm -rf /home/app/dependencies/BOOT-INF/lib/java-boot-jarmode-layertools-*.jar && \
-    rm -rf /home/app/application/META-INF/maven && \
-    rm -rf /home/app/application/BOOT-INF/classpath.idx && \
-    rm -rf /home/app/application/BOOT-INF/layers.idx
+COPY *.jar /opt/app.jar
+
+RUN java -Djarmode=layertools -jar /opt/app.jar extract && \
+    rm -rf /opt/dependencies/BOOT-INF/lib/java-boot-jarmode-layertools-*.jar && \
+    rm -rf /opt/application/META-INF/maven && \
+    rm -rf /opt/application/BOOT-INF/classpath.idx && \
+    rm -rf /opt/application/BOOT-INF/layers.idx
 
 # ----------------------------------------------------------------------------------------------------------------------
 # 构建
 # ----------------------------------------------------------------------------------------------------------------------
 FROM $BASE_IMG
 
-LABEL maintainer="应卓 <yingzhor@gmail.com>" \
-      description="本项目用来各种实验" \
-      github-url="https://github.com/yingzhuo/kubernetes-spring-examples"
+LABEL maintainer="应卓 <yingzhor@gmail.com>"
 
-COPY --from=builder /home/app/dependencies/ ./
-COPY --from=builder /home/app/spring-boot-loader/ ./
-COPY --from=builder /home/app/snapshot-dependencies/ ./
-COPY --from=builder /home/app/internal-dependencies/ ./
-COPY --from=builder /home/app/application/ ./
-COPY --chown=root:root ./docker-entrypoint.sh /home/app/sbin/entrypoint
+WORKDIR /opt
 
-RUN chmod +x /home/app/sbin/entrypoint
+COPY --from=builder /opt/dependencies/ ./
+COPY --from=builder /opt/spring-boot-loader/ ./
+COPY --from=builder /opt/snapshot-dependencies/ ./
+COPY --from=builder /opt/internal-dependencies/ ./
+COPY --from=builder /opt/application/ ./
+COPY --chown=root:root ./docker-entrypoint.sh /bin/entrypoint
+
+RUN chmod +x /bin/entrypoint
 
 ENV SPRING_PROFILES_ACTIVE=k8s
 

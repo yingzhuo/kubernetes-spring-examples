@@ -14,13 +14,6 @@
         </root>
     </springProfile>
 
-    <!-- ================================================     dco    ================================================ -->
-    <springProfile name="dco">
-        <root level="DEBUG">
-            <appender-ref ref="STDOUT"/>
-        </root>
-    </springProfile>
-
     <!-- ================================================     k8s    ================================================ -->
     <springProfile name="k8s">
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -58,13 +51,17 @@
         </root>
     </springProfile>
 
-    <logger name="org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker"
-            additivity="true" level="warn"/>
-    <logger name="com.github.yingzhuo.carnival.scanning.ClassPathScannerBuilder$ClassPathScanningCandidateComponentProvider"
-            additivity="true" level="warn"/>
-
+    <logger name="kse" additivity="true" level="DEBUG"/>
+    <logger name="com.github.yingzhuo.carnival.scanning.ClassPathScannerBuilder$ClassPathScanningCandidateComponentProvider" additivity="true" level="warn"/>
+    <logger name="org.springframework" additivity="true" level="info"/>
+    <logger name="org.hibernate.validator" additivity="true" level="info"/>
+    <logger name="org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker" additivity="true" level="warn"/>
     <logger name="io.github.resilience4j.retry.configure.RetryAspect" additivity="true" level="info"/>
     <logger name="io.github.resilience4j.utils.RxJava2OnClasspathCondition" additivity="true" level="warn"/>
     <logger name="io.github.resilience4j.utils.ReactorOnClasspathCondition" additivity="true" level="warn"/>
+    <logger name="org.apache.catalina" additivity="true" level="warn"/>
+    <logger name="org.apache.coyote" additivity="true" level="warn"/>
+    <logger name="io.micrometer" additivity="true" level="info"/>
+    <logger name="org.jboss.logging" additivity="true" level="warn"/>
 
 </included>

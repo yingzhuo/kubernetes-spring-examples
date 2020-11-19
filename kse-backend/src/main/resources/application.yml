@@ -4,7 +4,7 @@
 spring:
   profiles:
     active:
-      - dev
+      - k8s
   aop:
     auto: true
   main:
