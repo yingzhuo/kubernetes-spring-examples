@@ -3,11 +3,9 @@ package kse.backend
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
+@SpringBootApplication
+private class ApplicationBoot
+
 object ApplicationBoot extends App {
-
-  @SpringBootApplication
-  private class ApplicationBoot
-
   SpringApplication.run(classOf[ApplicationBoot], args: _*)
-
 }
