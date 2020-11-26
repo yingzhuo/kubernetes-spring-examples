@@ -40,9 +40,6 @@ spec:
               scheme: HTTP
               path: "/actuator/health"
               port: 8080
-              httpHeaders:
-                - name: "Authorization"
-                  value: "Basic YWN0dWF0b3I6YWN0dWF0b3I="
           ports:
             - name: http
               containerPort: 8080

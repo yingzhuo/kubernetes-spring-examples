@@ -31,6 +31,8 @@ COPY --from=builder /opt/internal-dependencies/ ./
 COPY --from=builder /opt/application/ ./
 COPY --chown=root:root ./docker-entrypoint.sh /bin/entrypoint
 
+HEALTHCHECK --interval=10s --timeout=30s --start-period=3s --retries=3 CMD curl --fail http://localhost:7777/actuator/info || exit 1
+
 RUN chmod +x /bin/entrypoint
 
 ENV SPRING_PROFILES_ACTIVE=k8s
