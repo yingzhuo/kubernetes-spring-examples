@@ -11,13 +11,4 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>kse-common</artifactId>
 
-    <dependencies>
-        <!-- env -->
-        <dependency>
-            <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-boot-stater-env</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
 </project>

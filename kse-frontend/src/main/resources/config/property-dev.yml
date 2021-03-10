@@ -1,0 +1,3 @@
+svc:
+  frontend: "localhost:7777"
+  backend: "localhost:8080"

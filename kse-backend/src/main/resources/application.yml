@@ -5,6 +5,9 @@ spring:
   profiles:
     active:
       - dev
+  config:
+    import:
+      - "classpath:kse/common/businessex/be.yml"
   aop:
     auto: true
   main:
@@ -16,7 +19,7 @@ spring:
     location: banner.txt
   jackson:
     locale: "zh_CN"
-    time-zone: "${APP_TIMEZONE:Asia/Shanghai}"
+    time-zone: "Asia/Shanghai"
     date-format: "yyyy-MM-dd HH:mm:ss.SSS"
     default-property-inclusion: always
     serialization:
@@ -79,9 +82,3 @@ management:
         include: "*"
         exclude:
           - "shutdown"
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Actuator
-# ----------------------------------------------------------------------------------------------------------------------
-carnival:
-  troubleshooting: true

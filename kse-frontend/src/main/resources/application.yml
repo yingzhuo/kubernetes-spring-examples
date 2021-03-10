@@ -7,6 +7,10 @@ spring:
       - dev
     include:
       - resilience
+  config:
+    import:
+      - "classpath:config/property.yml"
+      - "classpath:kse/common/businessex/be.yml"
   aop:
     auto: true
   main:
@@ -87,9 +91,3 @@ management:
         include: "*"
         exclude:
           - "shutdown"
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Actuator
-# ----------------------------------------------------------------------------------------------------------------------
-carnival:
-  troubleshooting: true
