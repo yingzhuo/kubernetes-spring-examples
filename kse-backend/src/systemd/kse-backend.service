@@ -1,0 +1,18 @@
+[Unit]
+Description=kse-backend
+Documentation=https://github.com/yingzhuo/kubernetes-spring-examples
+After=syslog.target
+
+[Service]
+User=yingzhuo
+Group=yingzhuo
+ExecStart=/var/lib/java8/bin/java \
+    -Djava.security.egd=file:/dev/./urandom \
+    -Duser.timezone="Asia/Shanghai" \
+    -Duser.language="zh" \
+    -Duser.country="CN" \
+    -jar /opt/kse/kse-backend.jar
+KillSignal=15
+
+[Install]
+WantedBy=multi-user.target

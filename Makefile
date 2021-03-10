@@ -2,9 +2,9 @@
 version := 0.0.1-$(shell /bin/date '+%Y%m%d%H%M%S')
 
 # 镜像版本
-backend-image  := 192.168.99.115/yingzhuo/kse-backend:$(version)
+backend-image         := 192.168.99.115/yingzhuo/kse-backend:$(version)
 backend-image-latest  := 192.168.99.115/yingzhuo/kse-backend:latest
-frontend-image := 192.168.99.115/yingzhuo/kse-frontend:$(version)
+frontend-image        := 192.168.99.115/yingzhuo/kse-frontend:$(version)
 frontend-image-latest := 192.168.99.115/yingzhuo/kse-frontend:latest
 
 # ======================================================================================================================

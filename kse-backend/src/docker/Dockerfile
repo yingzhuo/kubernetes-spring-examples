@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------------------------------------
 # 预构建
 # ----------------------------------------------------------------------------------------------------------------------
-ARG BASE_IMG=registry.cn-shanghai.aliyuncs.com/yingzhuo/java:jre-8
+ARG BASE_IMG=registry.cn-shanghai.aliyuncs.com/yingzhuo/java:jdk-8
 
 FROM $BASE_IMG AS builder
 
@@ -29,7 +29,7 @@ COPY --from=builder /opt/spring-boot-loader/ ./
 COPY --from=builder /opt/snapshot-dependencies/ ./
 COPY --from=builder /opt/internal-dependencies/ ./
 COPY --from=builder /opt/application/ ./
-COPY --chown=root:root ./docker-entrypoint.sh /bin/entrypoint
+COPY --chown=root:root docker-entrypoint.sh /bin/entrypoint
 
 HEALTHCHECK --interval=10s --timeout=30s --start-period=3s --retries=3 CMD curl --fail http://localhost:8080/actuator/info || exit 1
 

@@ -28,6 +28,13 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>${project.basedir}/src/systemd</directory>
+            <outputDirectory>systemd</outputDirectory>
+            <includes>
+                <include>**/*.service</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>${project.basedir}</directory>
             <includes>
                 <include>README.*</include>

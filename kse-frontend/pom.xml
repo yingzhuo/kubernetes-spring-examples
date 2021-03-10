@@ -158,7 +158,7 @@
                         <version>3.3.0</version>
                         <configuration>
                             <descriptors>
-                                <descriptor>${project.basedir}/src/main/assembly/bin.xml</descriptor>
+                                <descriptor>src/assembly/bin.xml</descriptor>
                             </descriptors>
                             <appendAssemblyId>true</appendAssemblyId>
                             <outputDirectory>${project.basedir}/../dist</outputDirectory>
@@ -198,7 +198,7 @@
                                 <configuration>
                                     <target>
                                         <copy todir="${project.build.directory}/docker-context/" force="true">
-                                            <fileset dir="${project.basedir}/src/main/docker">
+                                            <fileset dir="${project.basedir}/src/docker">
                                                 <include name="**/*"/>
                                             </fileset>
                                             <fileset dir="${project.basedir}/target/">
