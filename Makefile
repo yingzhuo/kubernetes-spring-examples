@@ -10,24 +10,24 @@ frontend-image-latest := 192.168.99.115/yingzhuo/kse-frontend:latest
 # ======================================================================================================================
 
 usage:
+	@echo "==========================================================="
 	@echo "usage          : 显示用法菜单"
-	@echo "build-jar      : 构建Jar文件"
+	@echo "dist           : 构建Jar文件"
 	@echo "build-image    : 构建Docker镜像"
 	@echo "push-image     : 推送Docker镜像到Harbor"
 	@echo "clean          : 清理"
 	@echo "version        : 变更版本号"
 	@echo "github         : 推送源代码到Github"
+	@echo "==========================================================="
 
-build-jar:
-	# 打包 (非分层方式)
-	@mvn -f $(CURDIR)/pom.xml clean package -P NonLayeredJar -D version=${version}
-	@mkdir -p $(CURDIR)/_dist
-	@cp $(CURDIR)/kse-backend/target/docker-context/*.jar  $(CURDIR)/_dist
-	@cp $(CURDIR)/kse-frontend/target/docker-context/*.jar $(CURDIR)/_dist
+dist:
+	# 打包
+	@rm -rf $(CURDIR)/dist/
+	@mvn -f $(CURDIR)/pom.xml clean package -P"dist" -D"version=${version}"
 
 build-image:
-	# 打包 (分层方式)
-	@mvn -f $(CURDIR)/pom.xml clean package -P LayeredJar -D version=${version}
+	# 打包
+	@mvn -f $(CURDIR)/pom.xml clean package -P"docker" -D"version=${version}"
 
 	# 构建镜像 (frontend)
 	@docker image build --tag $(frontend-image) $(CURDIR)/kse-frontend/target/docker-context/
@@ -47,10 +47,9 @@ push-image: build-image
 	@docker logout 192.168.99.115 &> /dev/null
 
 clean:
-	@rm -rf $(CURDIR)/_dist/
+	@rm -rf $(CURDIR)/dist/
 	@mvn -f $(CURDIR)/pom.xml clean -q
-	@docker image ls "192.168.99.115/yingzhuo/kse-*" | xargs docker rmi -f &> /dev/null || true
-	@docker image rm $(docker image ls --all --filter dangling=true -aq)  &> /dev/null || true
+	@docker system prune -a -f &> /dev/null || true
 
 version:
 	@mvn -f $(CURDIR)/pom.xml versions:set
@@ -62,4 +61,4 @@ github:
 	@git commit -m "$(shell /bin/date "+%F %T")"
 	@git push
 
-.PHONY: usage build-jar build-image push-image clean github version
+.PHONY: usage dist build-image push-image clean github version

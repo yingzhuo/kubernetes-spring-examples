@@ -61,28 +61,6 @@
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>LayeredJar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <jar.springboot.layered.jar>true</jar.springboot.layered.jar>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>NonLayeredJar</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <jar.springboot.layered.jar>false</jar.springboot.layered.jar>
-            </properties>
-        </profile>
-    </profiles>
-
     <dependencyManagement>
         <dependencies>
             <!-- KSE -->
@@ -270,19 +248,6 @@
                 <groupId>com.github.yingzhuo</groupId>
                 <artifactId>carnival-spring-boot-starter-json</artifactId>
                 <version>${carnival.version}</version>
-            </dependency>
-
-            <!-- env -->
-            <dependency>
-                <groupId>com.github.yingzhuo</groupId>
-                <artifactId>spring-boot-stater-env</artifactId>
-                <version>2.0.0</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.moandjiezana.toml</groupId>
-                        <artifactId>toml4j</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <!-- slf4j -->
