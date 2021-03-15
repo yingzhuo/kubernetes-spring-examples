@@ -226,11 +226,6 @@
             <!-- carnival -->
             <dependency>
                 <groupId>com.github.yingzhuo</groupId>
-                <artifactId>carnival-spring-boot-starter-actuator</artifactId>
-                <version>${carnival.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.yingzhuo</groupId>
                 <artifactId>carnival-spring-boot-starter-common</artifactId>
                 <version>${carnival.version}</version>
             </dependency>
@@ -518,13 +513,6 @@
                 <version>2.6.2</version>
             </dependency>
 
-            <!-- snakeyaml -->
-            <dependency>
-                <groupId>org.yaml</groupId>
-                <artifactId>snakeyaml</artifactId>
-                <version>1.28</version>
-            </dependency>
-
             <!-- scala -->
             <dependency>
                 <groupId>org.scala-lang</groupId>
@@ -636,6 +624,7 @@
                 <configuration>
                     <sourceDir>${project.basedir}/src/main/java</sourceDir>
                     <sourceDir>${project.basedir}/src/main/scala</sourceDir>
+                    <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
                 </configuration>
             </plugin>
             <plugin>
