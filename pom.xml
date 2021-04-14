@@ -47,13 +47,13 @@
 
         <!-- framework -->
         <spring.boot.version>2.4.4</spring.boot.version>
-        <spring.version>5.3.5</spring.version>
-        <jackson.version>2.12.2</jackson.version>
+        <spring.version>5.3.6</spring.version>
+        <jackson.version>2.12.3</jackson.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <netty.version>4.1.62.Final</netty.version>
-        <feign.version>11.0</feign.version>
+        <netty.version>4.1.63.Final</netty.version>
+        <feign.version>11.1</feign.version>
         <resilience4j.version>1.7.0</resilience4j.version>
-        <carnival.version>[1.8.0-4,)</carnival.version>
+        <carnival.version>[1.8.2,)</carnival.version>
 
         <!-- configuration -->
         <maven.test.skip>true</maven.test.skip>
